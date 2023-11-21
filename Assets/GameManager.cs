@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject PanelMenu;
     [SerializeField] GameObject PanelUSerPass;
+    [SerializeField] GameObject Saldo;
     [SerializeField] string usuario;
     [SerializeField] string contraseña;
 
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Usuario Ingresado");
             PanelUSerPass.SetActive(false);
             PanelMenu.SetActive(true);
+            Saldo.SetActive(true);
         }
         else
         {

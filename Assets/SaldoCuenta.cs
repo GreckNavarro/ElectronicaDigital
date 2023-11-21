@@ -9,6 +9,7 @@ public class SaldoCuenta : MonoBehaviour
     [SerializeField] Text textsaldo;
     [SerializeField] InputField retiro;
 
+    public int currentretiro;
     void Start()
     {
         textsaldo.text = saldoactual.ToString();
@@ -21,7 +22,7 @@ public class SaldoCuenta : MonoBehaviour
 
     public void OtherRetiro()
     {
-        int currentretiro = int.Parse(retiro.text);
+        currentretiro = int.Parse(retiro.text);
         if(currentretiro > saldoactual)
         {
             Debug.Log("No se puede retirar por falta de saldo");
@@ -29,16 +30,20 @@ public class SaldoCuenta : MonoBehaviour
         else
         {
             SetCurrentSaldo(currentretiro);
+            RetirarBilletes();
         }
         
     }
 
     public void SetCurrentSaldo(int i)
     {
-        if(saldoactual > 0)
+
+        if (saldoactual > 0)
         {
+         
             saldoactual = saldoactual - i;
             textsaldo.text = saldoactual.ToString();
+
         }
         else
         {
@@ -47,7 +52,7 @@ public class SaldoCuenta : MonoBehaviour
     }
     public void OtherDepost()
     {
-        int currentretiro = int.Parse(retiro.text);
+        currentretiro = int.Parse(retiro.text);
         Depositar(currentretiro);
 
     }
@@ -84,6 +89,14 @@ public class SaldoCuenta : MonoBehaviour
         Depositar(100);
     }
 
+    public void RetirarBilletes()
+    {
+        int cantidad50 = currentretiro / 100;
+        int cantidad100 = (currentretiro % 100) / 50;
+        int cantidad20 = (currentretiro % 50) % 100 / 20;
+
+        Debug.Log($"Retirando {currentretiro}: Billetes de 100: {cantidad50}, Billetes de 50: {cantidad100}, Billetes de 20: {cantidad20}");
+    }
 
 
 }
